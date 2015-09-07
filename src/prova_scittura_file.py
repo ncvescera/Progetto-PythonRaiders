@@ -1,4 +1,3 @@
-
 #SCRIVE SU FILE
 Myfile = open("credenziali.txt","w")
 Myfile.write("nico\n12345")
