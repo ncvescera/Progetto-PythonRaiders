@@ -1,3 +1,4 @@
+import psycopg2
 #SCRIVE SU FILE
 Myfile = open("credenziali.txt","w")
 Myfile.write("nico\n12345")
@@ -9,3 +10,6 @@ user = Myfile.readline()
 pas = Myfile.readline()
 print user,pas
 Myfile.close
+
+
+comm = psycopg2.connect(database="postgres", host="localhost", user="postgres", password="root", port="5432")
