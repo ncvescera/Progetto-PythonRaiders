@@ -19,10 +19,12 @@ except:
     print "Errore! Impossibile connetersi al Database."
 #SELECT per selezionare un campo della tabella specificata dopo FROM    
 cur = comm.cursor()
-cur.execute("SELECT comune FROM temporaneatab")
+cur.execute("SELECT comune, provincia, regione FROM temporaneatab")
 
 rows = cur.fetchall()
 for row in rows:
-   print "Comune = ", row[0],"\n"
+   print "Comune = ", row[0]
+   print "Provincia = ",row[1]
+   print "Regione = ",row[2],"\n"
    
 print "Operazione finita"
