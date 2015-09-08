@@ -19,12 +19,19 @@ except:
     print "Errore! Impossibile connetersi al Database."
 #SELECT per selezionare un campo della tabella specificata dopo FROM    
 cur = comm.cursor()
-cur.execute("SELECT comune, provincia, regione FROM temporaneatab")
+#cur.execute("SELECT comune, provincia, regione FROM temporaneatab")
+cur.execute("SELECT * FROM temporaneatab")
 
 rows = cur.fetchall()
+datiCSV = open("dati.csv","w")
+
 for row in rows:
-   print "Comune = ", row[0]
-   print "Provincia = ",row[1]
-   print "Regione = ",row[2],"\n"
-   
+   #print "Comune = ", row[0]
+   #print "Provincia = ",row[1]
+   #print "Regione = ",row[2],"\n"
+   print row,"\n"
+   datiCSV.write(str(row).strip("()"))
+   datiCSV.write("\n")
+  
+
 print "Operazione finita"
