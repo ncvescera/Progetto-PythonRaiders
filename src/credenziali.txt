@@ -1,2 +1,4 @@
-nico
-12345
+postgres
+localhost
+postgres
+root
