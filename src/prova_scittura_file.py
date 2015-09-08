@@ -17,3 +17,12 @@ try:
     print "Connessione stabilita con successo :D"
 except:
     print "Errore! Impossibile connetersi al Database."
+#SELECT per selezionare un campo della tabella specificata dopo FROM    
+cur = comm.cursor()
+cur.execute("SELECT comune FROM temporaneatab")
+
+rows = cur.fetchall()
+for row in rows:
+   print "Comune = ", row[0],"\n"
+   
+print "Operazione finita"
