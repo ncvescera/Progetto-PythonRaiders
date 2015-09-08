@@ -1,15 +1,19 @@
 import psycopg2
-#SCRIVE SU FILE
-Myfile = open("credenziali.txt","w")
-Myfile.write("nico\n12345")
-Myfile.close
 
 #LEGGE DA FILE SOLO LINEA PER LINEA
 Myfile = open("credenziali.txt","r")
+dbname= Myfile.readline()
+dbname = dbname[:-1] #serve per eliminare l'ultimo carattere: \n
+host = Myfile.readline()
+host = host[:-1]
 user = Myfile.readline()
+user = user[:-1]
 pas = Myfile.readline()
-print user,pas
+#print dbname,host,user,pas
 Myfile.close
 
-
-comm = psycopg2.connect(database="postgres", host="localhost", user="postgres", password="root", port="5432")
+try:
+    comm = psycopg2.connect(database = dbname, host = host, user = user, password = pas)
+    print "Connessione stabilita con successo :D"
+except:
+    print "Errore! Impossibile connetersi al Database."
