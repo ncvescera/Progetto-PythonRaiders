@@ -8,5 +8,4 @@ Myfile = open("credenziali.txt","r")
 user = Myfile.readline()
 pas = Myfile.readline()
 print user,pas
-
 Myfile.close
