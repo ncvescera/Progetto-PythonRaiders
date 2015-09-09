@@ -19,19 +19,31 @@ except:
     print "Errore! Impossibile connetersi al Database."
 #SELECT per selezionare un campo della tabella specificata dopo FROM    
 cur = comm.cursor()
-#cur.execute("SELECT comune, provincia, regione FROM temporaneatab")
 cur.execute("SELECT * FROM temporaneatab")
 
+
 rows = cur.fetchall()
+
 datiCSV = open("dati.csv","w")
+datiGEOJSON = open("dati.geojson","w")
 
 for row in rows:
-   #print "Comune = ", row[0]
-   #print "Provincia = ",row[1]
-   #print "Regione = ",row[2],"\n"
    print row,"\n"
    datiCSV.write(str(row).strip("()"))
    datiCSV.write("\n")
-  
+   
+cur = comm.cursor()
+cur.execute("SELECT comune, provincia, regione, longitudine, latitudine FROM temporaneatab")
+rows2 = cur.fetchall()
+   
+datiGEOJSON.write("{\"type\":\"FeatureCollection\",\"features\":[\n")
+   
+for row2 in rows2:
+    datiGEOJSON.write("{\"type\": \"Feature\",\"geometry\":{\"type\": \"Point\",\"coordinates\":["+str(row2[3])+","+str(row2[4])+"]},")
+    datiGEOJSON.write("\"properties\":{\"comune\":\""+row2[0]+"\",\"provincia\":\""+row2[1]+"\",\"regione\":\""+row2[2]+"\"}},\n")
+
+datiGEOJSON.seek(-2,1)
+
+datiGEOJSON.write(" \n]}")
 
 print "Operazione finita"
