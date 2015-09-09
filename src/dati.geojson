@@ -4506,4 +4506,5 @@
 {"type": "Feature","geometry":{"type": "Point","coordinates":[8.21278,44.0492]},"properties":{"comune":"Albenga","provincia":"SV","regione":"LIGURIA"}},
 {"type": "Feature","geometry":{"type": "Point","coordinates":[8.41222,44.4081]},"properties":{"comune":"Cairo Montenotte","provincia":"SV","regione":"LIGURIA"}},
 {"type": "Feature","geometry":{"type": "Point","coordinates":[8.20528,44.2836]},"properties":{"comune":"Osiglia","provincia":"SV","regione":"LIGURIA"}},
-{"type": "Feature","geometry":{"type": "Point","coordinates":[8.55667,44.3817]},"properties":{"comune":"Varazze","provincia":"SV","regione":"LIGURIA"}}  ]}
+{"type": "Feature","geometry":{"type": "Point","coordinates":[8.55667,44.3817]},"properties":{"comune":"Varazze","provincia":"SV","regione":"LIGURIA"}} 
+]}
