@@ -55,11 +55,15 @@ comm.close()
 
 print "Content-type:text/html\r\n\r\n"
 print "<html>"
+print "<head>"
+print "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\">"
+print "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css\">"
+print "</head>"
 print "<body>"
 if csv:
     print "<a href=\"dati.csv\"><button type=\"button\">CSV</button><br></a>"
 if gjson:
-    print "<a href=\"dati.geojson\"><button type=\"button\">GeoJson</button></a>"
+    print "<a href=\"dati.geojson\"><button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">GeoJson</button></a>"
 if not csv and not gjson:
     print "<h1>Non hai selezionato niente!</h1>"
 print "</body>"
