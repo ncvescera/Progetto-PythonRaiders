@@ -22,7 +22,7 @@ comm = psycopg2.connect(database = dbname, host = host, user = user, password = 
 
 #SELECT per selezionare un campo della tabella specificata dopo FROM    
 cur = comm.cursor()
-cur.execute("SELECT comune, provincia, regione, longitudine, latitudine FROM temporaneatab")
+cur.execute("SELECT comune, provincia, regione, longitudine, latitudine, nome_stazione FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
 rows = cur.fetchall()
 
 csv = form.getvalue('CSV')
@@ -37,7 +37,7 @@ gjson = form.getvalue('geoJson')
 if gjson:   
     datiGEOJSON = open("dati.geojson","w")  
     cur = comm.cursor()
-    cur.execute("SELECT comune, provincia, regione, longitudine, latitudine FROM temporaneatab")
+    cur.execute("SELECT comune, provincia, regione, longitudine, latitudine, nome_stazione FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
     rows2 = cur.fetchall()
     
     datiGEOJSON.write("{\"type\":\"FeatureCollection\",\"features\":[\n")
