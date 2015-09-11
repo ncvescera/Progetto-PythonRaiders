@@ -1,11 +1,69 @@
 <html>
 	<head>
+       <!-- <style>
+           div.box-con-angoli-arrotondati {
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 100px;
+              width: 500px;
+              height: auto;
+              background-color: white;
+              border-radius: 30px;	
+            }
+            
+            table.centrata {
+              font-size: medium;
+              font-family: "Times New Romans", "Georgia", "Serif";
+              
+              
+              
+            }
+            p {
+              font-size: 30px;
+              
+            }
+            
+        </style>-->
+        <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	</head>
 	<body>
-		<form action="../cgi-bin/script.py" method="GET">
-			<input type="checkbox" label="CSV" name="CSV">CSV<br>
-			<input type="checkbox" label="geoJson" name="geoJson">GeoJson<br>
-			<input type="submit" value="Invia">
-		</form>
+        
+        <div class="col-xs-4"></div>
+        <h2 >Scegli i file che vuoi salvare</h2>
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <form action="../cgi-bin/script.py" method="GET">
+                <table width="400px">
+                    <tr>
+                        <td width="280px">
+                <div class="col-xs-4"> 
+                    <div class="row">
+                        
+                        <input type="checkbox" label="CSV" name="CSV"><b> CSV</b></input>
+                    </div>       
+                    <div class="row">
+                        <input type="checkbox" label="geoJson" name="geoJson"><b> GeoJson</b></input>
+                    </div>
+                
+            
+            
+                <td>
+                    <div class="row">
+                        <button type="submit" class="btn btn-default">Invia</button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    
+            </table>
+            </form>
+        </div>
+  
+        <div class="col-xs-4"></div>
+
 	</body>
 </html>
