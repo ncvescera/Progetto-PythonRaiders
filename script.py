@@ -22,31 +22,34 @@ comm = psycopg2.connect(database = dbname, host = host, user = user, password = 
 
 #SELECT per selezionare un campo della tabella specificata dopo FROM    
 cur = comm.cursor()
-cur.execute("SELECT comune, provincia, regione, longitudine, latitudine, nome_stazione FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
+cur.execute("SELECT nome_stazione, min(comune) as comune, min(provincia) as provincia, min(regione) as regione, min(longitudine) as longitudine, min(latitudine) as latitudine FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
 rows = cur.fetchall()
 
 csv = form.getvalue('CSV')
 
 if csv:
-    datiCSV = open("dati.csv","w")
+    datiCSV = ""
     for row in rows:
-        datiCSV.write(str(row).strip("()").replace(",",";"))
-        datiCSV.write("\n")
- 
-gjson = form.getvalue('geoJson')       
-if gjson:   
-    datiGEOJSON = open("dati.geojson","w")  
-    cur = comm.cursor()
-    cur.execute("SELECT comune, provincia, regione, longitudine, latitudine, nome_stazione FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
-    rows2 = cur.fetchall()
-    
-    datiGEOJSON.write("{\"type\":\"FeatureCollection\",\"features\":[\n")
-    for row2 in rows2:
-        datiGEOJSON.write("{\"type\": \"Feature\",\"geometry\":{\"type\": \"Point\",\"coordinates\":["+str(row2[3])+","+str(row2[4])+"]},")
-        datiGEOJSON.write("\"properties\":{\"comune\":\""+row2[0]+"\",\"provincia\":\""+row2[1]+"\",\"regione\":\""+row2[2]+"\"}},\n")
+        datiCSV = str(datiCSV)+str(row).strip("()").replace(",",";")+"\n"
 
-    datiGEOJSON.seek(-2,1) #torna indietro di 2 caratteri dalla posizione corrente ed elimina l'ultima virgola
-    datiGEOJSON.write("\n]}")
+gjson = form.getvalue('geoJson')       
+if gjson:
+    datiGEOJSON = ""
+    cur = comm.cursor()
+    cur.execute("SELECT nome_stazione, min(comune) as comune, min(provincia) as provincia, min(regione) as regione, min(longitudine) as longitudine, min(latitudine) as latitudine FROM temporaneatab GROUP BY nome_stazione ORDER BY nome_stazione asc")
+    righe = cur.fetchall()
+
+    ctrl=0
+    
+    datiGEOJSON = str(datiGEOJSON)+"{\"type\":\"FeatureCollection\",\"features\":[\n"
+    for riga in righe:
+        if ctrl:
+            datiGEOJSON = str(datiGEOJSON)+","
+        else:
+            ctrl=1
+        datiGEOJSON = str(datiGEOJSON)+"{\"type\": \"Feature\",\"geometry\":{\"type\": \"Point\",\"coordinates\":["+str(riga[4])+","+str(riga[5])+"]},"
+        datiGEOJSON = str(datiGEOJSON)+"\"properties\":{\"comune\":\""+riga[1]+"\",\"provincia\":\""+riga[2]+"\",\"regione\":\""+riga[3]+"\"}}\n"
+    datiGEOJSON = str(datiGEOJSON)+"]}"
     
 comm.close()
 
