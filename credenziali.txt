@@ -1,4 +1,5 @@
-postgres
-localhost
+pluviometri
+paploo.irpi.cnr.it
 postgres
 root
+5432
